@@ -1,88 +1,89 @@
-# funstagram
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FunStagram - Play, Watch, Earn</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <div class="animated-background"></div>
+// src/App.js
+import React from 'react';
+import { Analytics } from '@vercel/analytics/react';
+import './App.css'; // Ensure you have your CSS file
 
-    <header>
-        <h1>FunStagram</h1>
-        <nav>
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#feed">Feed</a></li>
-                <li><a href="#games">Games</a></li>
-                <li><a href="#videos">YouTube</a></li>
-                <li><a href="#withdraw">Withdraw Money</a></li>
-            </ul>
-        </nav>
-    </header>
+const App = () => {
+    return (
+        <div className="App">
+            <div className="animated-background"></div>
 
-    <!-- Photo Feed Section -->
-    <section id="feed">
-        <h2>Photo Feed</h2>
-        <div class="photo-feed">
-            <div class="post">
-                <img src="https://via.placeholder.com/300" alt="User Photo">
-                <div class="post-details">
-                    <span class="likes">❤️ 0</span>
-                    <button class="like-btn">Like</button>
-                    <input type="text" class="comment-box" placeholder="Add a comment...">
+            <header>
+                <h1>FunStagram</h1>
+                <nav>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#feed">Feed</a></li>
+                        <li><a href="#games">Games</a></li>
+                        <li><a href="#videos">YouTube</a></li>
+                        <li><a href="#withdraw">Withdraw Money</a></li>
+                    </ul>
+                </nav>
+            </header>
+
+            {/* Photo Feed Section */}
+            <section id="feed">
+                <h2>Photo Feed</h2>
+                <div className="photo-feed">
+                    <div className="post">
+                        <img src="https://via.placeholder.com/300" alt="User Photo" />
+                        <div className="post-details">
+                            <span className="likes">❤️ 0</span>
+                            <button className="like-btn">Like</button>
+                            <input type="text" className="comment-box" placeholder="Add a comment..." />
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <!-- Additional posts can be dynamically added here -->
+            </section>
+
+            {/* Game Section */}
+            <section id="games">
+                <h2>Play Fun Games!</h2>
+                <div className="game-container">
+                    <button id="play-game">Play Simple Game</button>
+                    <canvas id="gameCanvas" width="300" height="300"></canvas>
+                </div>
+            </section>
+
+            {/* YouTube Section */}
+            <section id="videos">
+                <h2>Watch YouTube Videos</h2>
+                <div className="video-container">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/YOUR_VIDEO_ID" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+                </div>
+            </section>
+
+            {/* Withdraw Section */}
+            <section id="withdraw">
+                <h2>Withdraw Your Earnings</h2>
+                <p>Select a method to withdraw your earnings:</p>
+                <form id="withdraw-form">
+                    <label htmlFor="platform">Choose a platform:</label>
+                    <select id="platform" name="platform">
+                        <option value="airtm">Airtm</option>
+                        <option value="esewa">eSewa</option>
+                        <option value="khalti">Khalti</option>
+                        <option value="mobile-banking">Mobile Banking</option>
+                    </select>
+
+                    <label htmlFor="amount">Enter Amount ($):</label>
+                    <input type="number" id="amount" name="amount" placeholder="Enter amount" />
+
+                    <button type="submit">Withdraw</button>
+                </form>
+            </section>
+
+            <footer>
+                <p>© 2024 FunStagram - Play, Watch, Earn</p>
+            </footer>
+
+            {/* Include the Analytics component */}
+            <Analytics />
         </div>
-    </section>
+    );
+};
 
-    <!-- Game Section -->
-    <section id="games">
-        <h2>Play Fun Games!</h2>
-        <div class="game-container">
-            <button id="play-game">Play Simple Game</button>
-            <canvas id="gameCanvas" width="300" height="300"></canvas>
-        </div>
-    </section>
-
-    <!-- YouTube Section -->
-    <section id="videos">
-        <h2>Watch YouTube Videos</h2>
-        <div class="video-container">
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/YOUR_VIDEO_ID" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </div>
-    </section>
-
-    <!-- Withdraw Section -->
-    <section id="withdraw">
-        <h2>Withdraw Your Earnings</h2>
-        <p>Select a method to withdraw your earnings:</p>
-        <form id="withdraw-form">
-            <label for="platform">Choose a platform:</label>
-            <select id="platform" name="platform">
-                <option value="airtm">Airtm</option>
-                <option value="esewa">eSewa</option>
-                <option value="khalti">Khalti</option>
-                <option value="mobile-banking">Mobile Banking</option>
-            </select>
-
-            <label for="amount">Enter Amount ($):</label>
-            <input type="number" id="amount" name="amount" placeholder="Enter amount">
-
-            <button type="submit">Withdraw</button>
-        </form>
-    </section>
-
-    <footer>
-        <p>© 2024 FunStagram - Play, Watch, Earn</p>
-    </footer>
-
-    <script src="script.js"></script>
-  </body>
-</html>
+export default App;
 /* Style for the animated background */
 body {
     margin: 0;
@@ -203,7 +204,8 @@ footer {
     position: relative;
     bottom: 0;
     width: 100%;
-}document.addEventListener('DOMContentLoaded', () => {
+}
+document.addEventListener('DOMContentLoaded', () => {
     // Like button functionality
     const likeButtons = document.querySelectorAll('.like-btn');
     likeButtons.forEach(button => {
@@ -240,3 +242,5 @@ footer {
         }
     });
 });
+import './script'; // This will execute the script file
+
