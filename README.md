@@ -1,4 +1,88 @@
 # funstagram
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FunStagram - Play, Watch, Earn</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="animated-background"></div>
+
+    <header>
+        <h1>FunStagram</h1>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#feed">Feed</a></li>
+                <li><a href="#games">Games</a></li>
+                <li><a href="#videos">YouTube</a></li>
+                <li><a href="#withdraw">Withdraw Money</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Photo Feed Section -->
+    <section id="feed">
+        <h2>Photo Feed</h2>
+        <div class="photo-feed">
+            <div class="post">
+                <img src="https://via.placeholder.com/300" alt="User Photo">
+                <div class="post-details">
+                    <span class="likes">❤️ 0</span>
+                    <button class="like-btn">Like</button>
+                    <input type="text" class="comment-box" placeholder="Add a comment...">
+                </div>
+            </div>
+            <!-- Additional posts can be dynamically added here -->
+        </div>
+    </section>
+
+    <!-- Game Section -->
+    <section id="games">
+        <h2>Play Fun Games!</h2>
+        <div class="game-container">
+            <button id="play-game">Play Simple Game</button>
+            <canvas id="gameCanvas" width="300" height="300"></canvas>
+        </div>
+    </section>
+
+    <!-- YouTube Section -->
+    <section id="videos">
+        <h2>Watch YouTube Videos</h2>
+        <div class="video-container">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/YOUR_VIDEO_ID" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+    </section>
+
+    <!-- Withdraw Section -->
+    <section id="withdraw">
+        <h2>Withdraw Your Earnings</h2>
+        <p>Select a method to withdraw your earnings:</p>
+        <form id="withdraw-form">
+            <label for="platform">Choose a platform:</label>
+            <select id="platform" name="platform">
+                <option value="airtm">Airtm</option>
+                <option value="esewa">eSewa</option>
+                <option value="khalti">Khalti</option>
+                <option value="mobile-banking">Mobile Banking</option>
+            </select>
+
+            <label for="amount">Enter Amount ($):</label>
+            <input type="number" id="amount" name="amount" placeholder="Enter amount">
+
+            <button type="submit">Withdraw</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>© 2024 FunStagram - Play, Watch, Earn</p>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
 /* Style for the animated background */
 body {
     margin: 0;
@@ -119,4 +203,40 @@ footer {
     position: relative;
     bottom: 0;
     width: 100%;
-}
+}document.addEventListener('DOMContentLoaded', () => {
+    // Like button functionality
+    const likeButtons = document.querySelectorAll('.like-btn');
+    likeButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const likes = this.previousElementSibling;
+            let likeCount = parseInt(likes.textContent.split(' ')[1]);
+            likes.textContent = `❤️ ${++likeCount}`;
+        });
+    });
+
+    // Simple Game Setup
+    const playGameButton = document.getElementById('play-game');
+    const gameCanvas = document.getElementById('gameCanvas');
+    const ctx = gameCanvas.getContext('2d');
+
+    playGameButton.addEventListener('click', () => {
+        ctx.clearRect(0, 0, gameCanvas.width, gameCanvas.height);
+        ctx.fillStyle = '#ff4b2b';
+        ctx.fillRect(Math.random() * 250, Math.random() * 250, 50, 50);
+        alert("You caught the red square! Play again!");
+    });
+
+    // Withdraw Form Handling (Mocked)
+    const withdrawForm = document.getElementById('withdraw-form');
+    withdrawForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const platform = document.getElementById('platform').value;
+        const amount = document.getElementById('amount').value;
+
+        if (amount > 0) {
+            alert(`Your request to withdraw $${amount} via ${platform} has been submitted!`);
+        } else {
+            alert('Please enter a valid amount.');
+        }
+    });
+});
